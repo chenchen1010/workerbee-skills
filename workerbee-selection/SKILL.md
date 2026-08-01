@@ -1,6 +1,6 @@
 ---
 name: workerbee-selection
-description: 用「工蜂 Worker Bee」做小红书选品——多轮自适应选词找爆品、识别脏词死词、建行业池、开选品飞轮、筛机会池、历史补筛。当用户要找爆款商品、选品、做行业调研时使用。
+description: 用「工蜂 Worker Bee」做小红书选品——多轮自适应选词找爆品、识别脏词死词、建行业池、开选品飞轮、筛机会池、看日销趋势找正在起量的品、历史补筛。当用户要找爆款商品、选品、看销量涨没涨、做行业调研时使用。
 version: 1.0.0
 license: MIT
 metadata:
@@ -107,6 +107,38 @@ POST /api/pools/item/status    {"item_id":"...","pool":"池名","status":"confir
 ```
 
 可排序字段：price/sold/cart/daily_revenue/total_revenue/created_at。
+
+## 日销监控：找「正在起量」的品（不占手机，免费）
+
+一次性销量只能看到"卖了多少"，**日销监控看到的是"正在涨多快"**——后者才是能不能追进去的依据。
+工蜂每天自动给机会品记一次销量，攒几天就能出趋势。
+
+**主用法「谁在涨」**：
+```bash
+GET /api/sales/movers?days=7&limit=20&pool=池名
+```
+每项带：`increment`（窗口内销量增量）/ `daily_avg`（日均增量）/ `growth_pct`（增幅%）/
+`first_sold`→`last_sold` / `points`（样本天数）/ `price_changed`（期间有没有调价）。
+
+**怎么读这些数**：
+
+- **增量大 + 增幅小** = 大盘老品在稳定出货，跟进门槛高
+- **增量中 + 增幅大** = 新品正在起飞，**最值得追**
+- **`price_changed=true`** = 期间调过价，涨量可能是降价换来的，别只看销量
+- **`points` 少** = 样本天数不够，结论要谨慎
+
+**看单品曲线**：
+```bash
+GET /api/sales/trend?item_id=<商品ID>&days=30
+```
+`points[]` 每天带 `daily_increment`。**`trend_ready=false` 表示样本不足两天，
+这时候不许下"在涨/没涨"的结论**，如实告诉用户数据还不够。
+
+**看监控总览**：`GET /api/sales/status` —— 今天跑没跑、在监控多少品、攒了几天数据。
+
+**手动补跑一轮**：`POST /api/sales/snapshot` `{"limit":0,"concurrency":4}`。
+serve 里内置的每日 worker 会自动跑，一般只在"想立刻看今天数据"时才手动调。
+它只读商品网页，不占手机、不耗采集额度，可以放心调。
 
 ## 历史补筛（不占手机，免费）
 
