@@ -104,10 +104,13 @@ curl -s -H "X-Api-Key: $KEY" "$BASE/api/task_result?id=<task_id>"
 多数靠店铺直销、笔记不挂车，此路命中率极低——那类赛道请改用 `workerbee-content-mining` 的
 博主发现路线。0 命中返回 `completed` + `no_matrix_match`，**只说明本轮没发现，不能断言该店没有矩阵号**。
 
-**root 手机关键词搜索**——秒级抓搜索结果（需要用户有 root 设备，没有就跳过）：
+**root 手机关键词搜索**——秒级抓搜索接口，一次拿几十条笔记+UID，不占普通手机：
 ```json
 {"task_type":"root_keyword_search","keyword":"天赋测评","pages":3,"device_serial":"<序列号>"}
 ```
+**用之前先问用户「你有 root 过的安卓手机、并且在工蜂里配好了吗？」**——这是台特制设备，
+多数人没有。没有就用 `creator_discovery` 代替（普通手机扫笔记流，慢一些，结果一样能用），
+**别因为没 root 就说这事做不了**。
 
 ## 计费与额度
 
