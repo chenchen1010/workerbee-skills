@@ -22,7 +22,8 @@ metadata:
 工蜂启动时会写一个「发现文件」，地址和钥匙都在里面：
 
 - Windows：`%APPDATA%\工蜂\api.json`
-- 客户版可能是：`%APPDATA%\工蜂客户版\api.json`
+- macOS：`~/Library/Application Support/工蜂/api.json`
+- 客户版把上面路径里的 `工蜂` 换成 `工蜂客户版`
 
 ```
 {"base_url": "http://127.0.0.1:59354", "key": "wf_live_xxxxxxxx", "pid": 1234, "schema": 1}
