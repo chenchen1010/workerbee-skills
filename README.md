@@ -39,7 +39,7 @@
 
 把这段话发给你的 AI 助手：
 
-> 请从 https://github.com/<owner>/<repo> 下载 skills/ 目录下的全部技能，
+> 请从 https://github.com/chenchen1010/workerbee-skills 下载 workerbee- 开头的全部技能文件夹，
 > 复制到我的 AI 技能目录（Claude Code 是 ~/.claude/skills/，Codex 是 ~/.codex/skills/），
 > 然后读一遍 workerbee-connect 技能，帮我连上工蜂。
 
