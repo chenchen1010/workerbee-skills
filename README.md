@@ -36,14 +36,14 @@
 
 ### Workbuddy
 
-在 Skills Hub 里搜索并添加。
+复制到 `~/.workbuddy/skills/`，或在 Skills Hub 里搜索并添加。
 
 ### 让 AI 自己装
 
 把这段话发给你的 AI 助手：
 
 > 请从 https://github.com/chenchen1010/workerbee-skills 下载 workerbee- 开头的全部技能文件夹，
-> 复制到我的 AI 技能目录（Claude Code 是 ~/.claude/skills/，Codex 是 ~/.codex/skills/）。
+> 复制到我的 AI 技能目录（Claude Code 是 ~/.claude/skills/，Codex 是 ~/.codex/skills/，WorkBuddy 是 ~/.workbuddy/skills/）。
 > 工蜂的接口地址和钥匙我等下粘给你（在工蜂 设置 → 接口开放 点「复制这段给 AI」）。
 
 ## 装好之后怎么用
