@@ -5,12 +5,12 @@ version: 1.0.0
 license: MIT
 metadata:
   product: 工蜂 Worker Bee
-  related_skills: [workerbee-connect, workerbee-collect, workerbee-content-mining]
+  related_skills: [workerbee-content-mining, workerbee-viral-notes]
 ---
 
 # 工蜂 → 飞书多维表格交付
 
-前置：先用 `workerbee-connect` 拿到 `base_url` 和钥匙。下文 `$BASE`/`$KEY` 指代它们。
+前置：拿到工蜂接口的 `base_url` 和钥匙（用户从工蜂 设置 → 接口开放 复制「给 AI 的说明」粘给你，或读 discovery 文件 `<appData>/工蜂/api.json`；接口说明书在 `GET /api/docs`）。下文 `$BASE`/`$KEY` 指代它们。
 
 ## 铁律：走这一个端点，不要自己拼字段
 

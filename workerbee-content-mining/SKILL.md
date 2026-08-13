@@ -5,13 +5,13 @@ version: 1.0.0
 license: MIT
 metadata:
   product: 工蜂 Worker Bee
-  related_skills: [workerbee-connect, workerbee-collect, workerbee-selection, workerbee-feishu-delivery]
+  related_skills: [workerbee-viral-notes, workerbee-feishu-delivery]
 ---
 
 # 工蜂内容线：博主与机会挖掘
 
-前置：`workerbee-connect` 拿地址钥匙。本 skill 是**内容线**（看互动找机会），
-跟 `workerbee-selection` 的**商品线**（看销量找爆品）互补，两条线可以并行跑。
+前置：拿到工蜂接口的 `base_url` 和钥匙（用户从工蜂 设置 → 接口开放 复制「给 AI 的说明」粘给你，或读 discovery 文件 `<appData>/工蜂/api.json`；接口说明书在 `GET /api/docs`）。下文 `$BASE`/`$KEY` 指代它们。
+本 skill 是**内容线**：看互动数据找「需求已验证但还没变现」的机会。
 
 ## 三种典型诉求，三条路
 
