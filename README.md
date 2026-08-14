@@ -1,7 +1,7 @@
 # 工蜂 Worker Bee · AI 技能包（Skills）
 
 给 Claude Code / Codex / Workbuddy 等 AI 助手用的**进阶编排技能**。装上之后，
-你可以直接用大白话指挥 AI 操作「工蜂 Worker Bee」——最强小红书 API 应用。
+你可以直接用大白话指挥 AI 操作「工蜂 Worker Bee」——核弹级小红书 API 应用。
 
 **先说清楚：基础采集不需要装任何技能。** 连接、建任务、取结果这些，把工蜂
 设置 → 接口开放 里「给 AI 的说明」整段粘给你的 AI 就够了——接口自带说明书
