@@ -39,6 +39,28 @@ def adb(*a):
     return subprocess.run([ADB, "-s", SERIAL, *a], capture_output=True, text=True, timeout=60).stdout
 
 
+def logical_viewport() -> tuple[int, int]:
+    """Return the active ADB coordinate space; a size override beats panel pixels."""
+    output = adb("shell", "wm", "size")
+    matches = list(re.finditer(r"(Physical|Override)\s+size:\s*(\d+)x(\d+)", output or "", re.I))
+    override = next((match for match in reversed(matches) if match.group(1).lower() == "override"), None)
+    chosen = override or (matches[-1] if matches else None)
+    if chosen is None:
+        raise RuntimeError(f"viewport_unknown: cannot parse adb wm size output: {(output or '')[:160]}")
+    width, height = int(chosen.group(2)), int(chosen.group(3))
+    if width >= height:
+        raise RuntimeError(f"unsupported_orientation: portrait_required, got {width}x{height}")
+    return width, height
+
+
+def swipe_note_goods_card_into_view() -> None:
+    width, height = logical_viewport()
+    x = round((width - 1) * 0.5)
+    start_y = round((height - 1) * 0.65)
+    end_y = round((height - 1) * 0.41)
+    adb("shell", "input", "swipe", str(x), str(start_y), str(x), str(end_y), "250")
+
+
 PARSE = r'''
 import json, sys, re
 from mitmproxy.io import FlowReader
@@ -97,7 +119,7 @@ def main() -> int:
         adb("shell", "am", "start", "-a", "android.intent.action.VIEW",
             "-d", f"xhsdiscover://item/{nid}", "com.xingin.xhs")   # 坑4:深链直开,无需 token
         time.sleep(2.4)
-        adb("shell", "input", "swipe", "170", "520", "170", "330", "250")  # 把商品卡滑进视口
+        swipe_note_goods_card_into_view()
         time.sleep(1.0)
         adb("shell", "input", "keyevent", "4")   # 返回
         time.sleep(0.5)

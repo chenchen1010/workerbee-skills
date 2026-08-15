@@ -104,9 +104,8 @@ images_list[].url_size_large`。到目标时间就停。
 # 只存 widgets 流,flow 极小
 mitmdump ... --set "save_stream_filter=~u note/widgets" -w $FLOW
 # 逐篇:深链开 → 小滑一下把商品卡滑进视口(触发 widgets 请求)→ 返回
-adb am start -d xhsdiscover://item/<nid>; sleep 2.4
-adb input swipe 170 520 170 330 250; sleep 1.0
-adb input keyevent 4
+# verify_itemid.py 会读取 adb shell wm size，优先使用 Override size，再按逻辑视口比例滑动。
+python scripts/verify_itemid.py <cand_note_ids.json> <out_map.json>
 ```
 
 解析:itemId 藏在 `data.goods_card_comment_guide.link` 的 `rate_limit_meta` 里(URL 编码),
