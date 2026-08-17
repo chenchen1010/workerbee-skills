@@ -24,6 +24,8 @@ description: 诊断并完成「工蜂 Worker Bee」新安卓手机的首次连�
 
 4. 等脚本返回最终结果。只有 `ready=true`、`smoke.state=passed` 且 `collection_capable=true` 才能说新手机已可采集。健康检查、组件安装或界面显示在线都不能代替至少保存 1 条商品链接的深度自检。
 
+需要查看完整图文步骤时，打开[《工蜂采集工具 · 使用指南》](https://gcn6bvkburhk.feishu.cn/docx/RhhTdw5B3oe7i8xWMYKcEIQInre)。
+
 ## 手机侧分支
 
 - `unauthorized`：让用户在手机弹窗勾选“始终允许这台电脑”并点允许。不要重置 adb key 或删用户配置。
@@ -40,6 +42,12 @@ description: 诊断并完成「工蜂 Worker Bee」新安卓手机的首次连�
 - 不要打印、回传或保存 discovery 文件中的完整钥匙。脚本不会输出钥匙。
 - 不要删掉设备健康记录、绕过授权或修改套餐设备上限。
 - 失败时保留脚本 JSON 输出中的 `error` 与 `next_steps`，但在对用户解释时翻译为人话。
+
+## 不是连接故障的拒绝码
+
+- `license_required`：工蜂尚未激活；先在应用内完成激活，不要反复插拔手机。
+- `device_limit_exceeded`：当前套餐的设备名额已满；按应用提供的流程移除不再使用的离线设备或升级套餐，不要修改数据库绕过限制。
+- `MODULE_NOT_IN_PLAN`：手机可能已经连接正常，但当前套餐不包含用户要运行的采集模块；不要把它误判为 USB、ADB 或组件安装失败。
 
 ## 脚本
 
